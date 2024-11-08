@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de incidentes</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Incident Reports</h2>
+<table id="incidentsTable">
+    <thead>
+        <tr>
+            <th>Ubicación</th>
+            <th>Descripción</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Incident rows will be inserted here -->
+    </tbody>
+</table>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCHtoyhT-yRgRvvrW9_4JYHQimh51LFdzc",
+        authDomain: "fastresponse-b18a0.firebaseapp.com",
+        projectId: "fastresponse-b18a0",
+        storageBucket: "fastresponse-b18a0.firebasestorage.app",
+        messagingSenderId: "1094379140401",
+        appId: "1:1094379140401:web:ec4b40a439c6a727daac10",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function fetchIncidents() {
+        const incidentsRef = collection(db, "incidents");
+        const querySnapshot = await getDocs(incidentsRef);
+        const tableBody = document.querySelector("#incidentsTable tbody");
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const row = document.createElement("tr");
+
+            const ubicacionCell = document.createElement("td");
+            ubicacionCell.textContent = data.ubicacion;
+            row.appendChild(ubicacionCell);
+
+            const descripcionCell = document.createElement("td");
+            descripcionCell.textContent = data.descripcion;
+            row.appendChild(descripcionCell);
+
+            const tipoCell = document.createElement("td");
+            tipoCell.textContent = data.tipo;
+            row.appendChild(tipoCell);
+
+            const timestampCell = document.createElement("td");
+            const timestamp = data.timestamp.toDate(); // Convert Firestore timestamp to JS Date
+            timestampCell.textContent = timestamp.toLocaleString();
+            row.appendChild(timestampCell);
+
+            const actionsCell = document.createElement("td");
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Eliminar";
+            deleteButton.onclick = () => deleteIncident(doc.id);
+            actionsCell.appendChild(deleteButton);
+            row.appendChild(actionsCell);
+
+            tableBody.appendChild(row);
+        });
+    }
+
+    async function deleteIncident(incidentId) {
+        try {
+            await deleteDoc(doc(db, "incidents", incidentId));
+            alert("Reporte eliminado.");
+            location.reload(); // Refresh the table
+        } catch (error) {
+            console.error("Error al eliminar el reporte:", error);
+            alert("Hubo un error al eliminar el reporte.");
+        }
+    }
+
+    fetchIncidents();
+</script>
+</body>
+</html>
+
