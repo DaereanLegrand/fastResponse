@@ -41,22 +41,13 @@
 
                 <button type="submit">Enviar Reporte</button>
             </form>
+
+            <div id="successMessage" class="message success" style="display: none;">Reporte enviado correctamente.</div>
+            <div id="errorMessage" class="message error" style="display: none;">Hubo un error al enviar el reporte. Intenta nuevamente.</div>
         </div>
 
-        <script src="main.js"></script>
+        <script type="module" src="main.js"></script>
         <script src="validation.js"></script>
-        <script type="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-            const firebaseConfig = {
-                apiKey: "AIzaSyCHtoyhT-yRgRvvrW9_4JYHQimh51LFdzc",
-                authDomain: "fastresponse-b18a0.firebaseapp.com",
-                projectId: "fastresponse-b18a0",
-                storageBucket: "fastresponse-b18a0.firebasestorage.app",
-                messagingSenderId: "1094379140401",
-                appId: "1:1094379140401:web:ec4b40a439c6a727daac10",
-            };
-
-            const app = initializeApp(firebaseConfig);
-        </script>
     </body>
 </html>
+
