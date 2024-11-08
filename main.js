@@ -2,6 +2,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebas
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js";
 
+const sendNotification = require('./notifications/sendNotification');
+
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js')
@@ -33,6 +36,14 @@ document.getElementById("incidentForm").addEventListener("submit", async (e) => 
     const ubicacion = document.getElementById("ubicacion").value;
     const descripcion = document.getElementById("descripcion").value;
     const mediaFile = document.getElementById("media").files[0];
+
+    // Ejemplo de uso:
+    // sendNotification(
+    //   message = 'Posible caso de crimen detectado', 
+    //   title = 'ALERTA', 
+    //   url = 'https://www.google.com/maps/@-16.3948183,-71.5414069,16z', 
+    //   urlTitle = 'Location'
+    // );
 
     try {
         const docData = {
