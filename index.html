@@ -1,35 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reporte de Incidente</title>
-<link rel="stylesheet" href="styles.css">
-<link rel="manifest" href="manifest.json">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Reporte de Incidente</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="manifest" href="manifest.json" />
+    </head>
+    <body>
+        <div class="container">
+            <h2>Formulario de Reporte de Incidente</h2>
+            <form id="incidentForm" enctype="multipart/form-data">
+                <label for="ubicacion">Ubicación o Zona</label>
+                <input
+                    type="text"
+                    id="ubicacion"
+                    name="ubicacion"
+                    placeholder="Ej. Calle 5, Zona Centro"
+                    required
+                />
+                <div id="ubicacionError" class="error"></div>
 
-<div class="container">
-	<h2>Formulario de Reporte de Incidente</h2>
-	<form id="incidentForm" enctype="multipart/form-data">
-		<label for="ubicacion">Ubicación o Zona</label>
-		<input type="text" id="ubicacion" name="ubicacion" placeholder="Ej. Calle 5, Zona Centro" required>
-		<div id="ubicacionError" class="error"></div>
+                <label for="descripcion">Descripción del Incidente</label>
+                <textarea
+                    id="descripcion"
+                    name="descripcion"
+                    rows="4"
+                    placeholder="Describe el incidente..."
+                    required
+                ></textarea>
+                <div id="descripcionError" class="error"></div>
 
-		<label for="descripcion">Descripción del Incidente</label>
-		<textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe el incidente..." required></textarea>
-		<div id="descripcionError" class="error"></div>
+                <label for="media">Foto o Video del Incidente</label>
+                <input
+                    type="file"
+                    id="media"
+                    name="media"
+                    accept="image/*,video/*"
+                />
 
-		<label for="media">Foto o Video del Incidente</label>
-		<input type="file" id="media" name="media" accept="image/*,video/*">
+                <button type="submit">Enviar Reporte</button>
+            </form>
+        </div>
 
-		<button type="submit">Enviar Reporte</button>
-	</form>
-</div>
+        <script src="main.js"></script>
+        <script src="validation.js"></script>
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+            const firebaseConfig = {
+                apiKey: "AIzaSyCHtoyhT-yRgRvvrW9_4JYHQimh51LFdzc",
+                authDomain: "fastresponse-b18a0.firebaseapp.com",
+                projectId: "fastresponse-b18a0",
+                storageBucket: "fastresponse-b18a0.firebasestorage.app",
+                messagingSenderId: "1094379140401",
+                appId: "1:1094379140401:web:ec4b40a439c6a727daac10",
+            };
 
-<script src="main.js"></script>
-<script src="validation.js"></script>
-
-</body>
+            const app = initializeApp(firebaseConfig);
+        </script>
+    </body>
 </html>
-
