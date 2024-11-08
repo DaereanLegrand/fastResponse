@@ -1,53 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Reporte de Incidente</title>
-        <link rel="stylesheet" href="styles.css" />
-        <link rel="manifest" href="manifest.json" />
-    </head>
-    <body>
-        <div class="container">
-            <h2>Formulario de Reporte de Incidente</h2>
-            <form id="incidentForm" enctype="multipart/form-data">
-                <label for="ubicacion">Ubicación o Zona</label>
-                <input
-                    type="text"
-                    id="ubicacion"
-                    name="ubicacion"
-                    placeholder="Ej. Calle 5, Zona Centro"
-                    required
-                />
-                <div id="ubicacionError" class="error"></div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reporte de Incidente</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+    <div class="container">
+        <h2>Formulario de Reporte de Incidente</h2>
+        <form id="incidentForm" enctype="multipart/form-data">
+            <label for="ubicacion">Ubicación o Zona</label>
+            <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej. Calle 5, Zona Centro" required />
+            <div id="ubicacionError" class="error"></div>
 
-                <label for="descripcion">Descripción del Incidente</label>
-                <textarea
-                    id="descripcion"
-                    name="descripcion"
-                    rows="4"
-                    placeholder="Describe el incidente..."
-                    required
-                ></textarea>
-                <div id="descripcionError" class="error"></div>
+            <label for="descripcion">Descripción del Incidente</label>
+            <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe el incidente..." required></textarea>
+            <div id="descripcionError" class="error"></div>
 
-                <label for="media">Foto o Video del Incidente</label>
-                <input
-                    type="file"
-                    id="media"
-                    name="media"
-                    accept="image/*,video/*"
-                />
+            <label for="media">Foto o Video del Incidente</label>
+            <input type="file" id="media" name="media" accept="image/*,video/*" />
 
-                <button type="submit">Enviar Reporte</button>
-            </form>
+            <button type="submit">Enviar Reporte</button>
+        </form>
 
-            <div id="successMessage" class="message success" style="display: none;">Reporte enviado correctamente.</div>
-            <div id="errorMessage" class="message error" style="display: none;">Hubo un error al enviar el reporte. Intenta nuevamente.</div>
+        <div id="successMessage" class="message success" style="display: none">
+            Reporte enviado correctamente.
         </div>
-
-        <script type="module" src="main.js"></script>
-        <script src="validation.js"></script>
-    </body>
+        <div id="errorMessage" class="message error" style="display: none">
+            Hubo un error al enviar el reporte. Intenta nuevamente.
+        </div>
+    </div>
+</body>
 </html>
 

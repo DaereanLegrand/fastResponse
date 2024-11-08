@@ -40,6 +40,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+
 document
     .getElementById("incidentForm")
     .addEventListener("submit", async (e) => {
@@ -49,16 +50,7 @@ document
         const descripcion = document.getElementById("descripcion").value;
         const mediaFile = document.getElementById("media").files[0];
 
-        // Ejemplo de uso:
-        // sendNotification(
-        //   message = 'Posible caso de crimen detectado',
-        //   title = 'ALERTA',
-        //   url = 'https://www.google.com/maps/@-16.3948183,-71.5414069,16z',
-        //   urlTitle = 'Location'
-        // );
-
         try {
-            /*
             const docData = {
                 ubicacion: ubicacion,
                 descripcion: descripcion,
@@ -76,9 +68,9 @@ document
                 docData.mediaUrl = mediaUrl;
             }
 
-            await addDoc(collection(db, "incidents"), docData);
+            const docRef = await addDoc(collection(db, "incidents"), docData);
+            console.log("Reporte enviado correctamente con ID:", docRef.id);
             alert("Reporte enviado correctamente");
-            */
 
             fetch("http://localhost:3000/send-notification", {
                 method: "POST",
@@ -102,3 +94,4 @@ document
             alert("Hubo un error al enviar el reporte. Intenta nuevamente.");
         }
     });
+

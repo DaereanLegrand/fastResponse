@@ -8,7 +8,7 @@ body {
     background-color: #f4f6f9;
     color: #333;
 }
-.container {
+.container, .map-section {
     max-width: 500px;
     margin: 50px auto;
     padding: 20px;
@@ -17,7 +17,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+/* Form Styles */
+h2, h1 {
     text-align: center;
     color: #333;
     font-size: 24px;
@@ -67,3 +68,35 @@ button:hover {
     font-size: 0.85em;
     margin-top: 5px;
 }
+
+/* Map Section */
+#map-container {
+    border: 3px solid #4285F4;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 10px;
+}
+
+#map {
+    height: 450px;
+    width: 100%;
+}
+
+#report-btn:disabled, #report-Local {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4285F4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#report-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
