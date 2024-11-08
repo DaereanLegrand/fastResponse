@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa Interactivo - Proyecto</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #map-container {
+      border: 3px solid #4285F4; 
+      border-radius: 8px;
+      overflow: hidden;
+      width: 80%;
+      max-width: 600px;
+      margin-bottom: 10px;
+    }
+
+    #map {
+      height: 450px;
+      width: 100%;
+    }
+
+    #report-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #4285F4;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    #report-btn:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Fast Response - Arequipa </h1>
+  <div id="map-container">
+    <div id="map"></div>
+  </div>
+
+  <button id="report-btn" disabled>Reportar</button>
+
+  <form id="coordinate-form" action="tu_formulario.html" method="POST">
+    <input type="hidden" id="coordinate-input" name="coordinates">
+  </form>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwXEY7Fv0hHA_hp2bip3ZAd8n8HUm3mLw&callback=initMap" async defer></script>
+
+  <script>
+    let savedCoordinates = null; 
+
+    function initMap() {
+      const arequipa = { lat: -16.4090474, lng: -71.537451 };
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,     
+        center: arequipa 
+      });
+
+      map.addListener("click", (event) => {
+        savedCoordinates = {
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng()
+        };
+
+        document.getElementById("report-btn").disabled = false;
+
+        console.log("Coordenadas seleccionadas:", savedCoordinates);
+
+        new google.maps.Marker({
+          position: savedCoordinates,
+          map: map,
+          title: `Coordenadas: ${savedCoordinates.lat}, ${savedCoordinates.lng}`
+        });
+      });
+    }
+
+    document.getElementById("report-btn").addEventListener("click", () => {
+      if (savedCoordinates) {
+
+        const googleMapsLink = `https://www.google.com/maps?q=${savedCoordinates.lat},${savedCoordinates.lng}`;
+        
+        document.getElementById("coordinate-input").value = googleMapsLink;
+        alert("Enlace guardado: " + googleMapsLink);
+
+        document.getElementById("coordinate-form").submit();
+      }
+    });
+  </script>
+
+</body>
+</html>
