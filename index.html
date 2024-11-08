@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Incidente</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+	<h2>Formulario de Reporte de Incidente</h2>
+	<form id="incidentForm" enctype="multipart/form-data">
+		<label for="ubicacion">Ubicación o Zona</label>
+		<input type="text" id="ubicacion" name="ubicacion" placeholder="Ej. Calle 5, Zona Centro" required>
+		<div id="ubicacionError" class="error"></div>
+
+		<label for="descripcion">Descripción del Incidente</label>
+		<textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe el incidente..." required></textarea>
+		<div id="descripcionError" class="error"></div>
+
+		<label for="media">Foto o Video del Incidente</label>
+		<input type="file" id="media" name="media" accept="image/*,video/*">
+
+		<button type="submit">Enviar Reporte</button>
+	</form>
+</div>
+
+<script src="validation.js"></script>
+
+</body>
+</html>
+
