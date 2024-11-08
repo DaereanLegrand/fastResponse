@@ -47,7 +47,18 @@
       background-color: #cccccc;
       cursor: not-allowed;
     }
-  </style>
+    button{
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #4285F4;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+</style>
 </head>
 <body>
 
@@ -55,10 +66,12 @@
   <div id="map-container">
     <div id="map"></div>
   </div>
-
+  
+  <button id="report-Local" > Mi ubicación</button>
   <button id="report-btn" disabled>Reportar</button>
 
-  <form id="coordinate-form" action="tu_formulario.html" method="POST">
+
+  <form id="coordinate-form" action="index.html" method="POST">
     <input type="hidden" id="coordinate-input" name="coordinates">
   </form>
 
@@ -102,6 +115,25 @@
         alert("Enlace guardado: " + googleMapsLink);
 
         document.getElementById("coordinate-form").submit();
+      }
+    });
+
+    document.getElementById("report-Local").addEventListener("click", () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          const googleMapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+          document.getElementById("coordinate-input").value = googleMapsLink;
+          alert("Enlace guardado: " + googleMapsLink);
+
+          document.getElementById("coordinate-form").submit();
+        }, () => {
+          alert("No se pudo obtener la ubicación.");
+        });
+      } else {
+        alert("Geolocalización no soportada por el navegador.");
       }
     });
   </script>
